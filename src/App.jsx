@@ -12,6 +12,8 @@ import Booking from './pages/Booking';
 import Reviews from './components/Reviews';
 import Login from './pages/Login';
 import Admin from './pages/Admin';
+import Register from './pages/Register';
+import Profile from './pages/Profile';
 
 export default function App() {
   const [showForm, setShowForm] = useState(false);
@@ -73,6 +75,14 @@ export default function App() {
           />
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<Admin />} />
+          <Route
+  path="/profile"
+  element={<Profile />}
+/>
+          <Route
+  path="/register"
+  element={<Register />}
+/>
         </Routes>
         <Reviews />
         {successMessage && (

@@ -8,10 +8,59 @@ export default function Login() {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    if (username === 'admin' && password === '1234') {
-      navigate("/admin");
+
+    const users =
+      JSON.parse(
+        localStorage.getItem('users')
+      ) || [];
+  
+    const adminUser = {
+      username: 'admin',
+      password: '1234',
+      role: 'admin',
+    };
+  
+    // เช็ค admin
+  
+    if (
+      username === adminUser.username &&
+      password === adminUser.password
+    ) {
+  
+      setIsLoggedIn(true);
+  
+      localStorage.setItem(
+        'currentUser',
+        JSON.stringify(adminUser)
+      );
+  
+      navigate('/admin');
+  
+      return;
+    }
+  
+    // เช็ค customer
+  
+    const foundUser = users.find(
+      (user) =>
+        user.email === username &&
+        user.password === password
+    );
+  
+    if (foundUser) {
+  
+      localStorage.setItem(
+        'currentUser',
+        JSON.stringify(foundUser)
+      );
+  
+      navigate('/profile');
+  
     } else {
-      alert('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
+  
+      alert(
+        'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง'
+      );
     }
   };
 
@@ -22,7 +71,7 @@ export default function Login() {
 
         <input
           type="text"
-          placeholder="Username"
+          placeholder="Email หรือ Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
