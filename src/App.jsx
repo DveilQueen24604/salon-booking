@@ -20,7 +20,14 @@ export default function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [loading, setLoading] = useState(true);
   const [successMessage, setSuccessMessage] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
 
+    const currentUser =
+      localStorage.getItem('currentUser');
+  
+    return currentUser ? true : false;
+  
+  });
   const [bookings, setBookings] = useState(() => {
     const savedBookings = localStorage.getItem('bookings');
 
@@ -49,7 +56,10 @@ export default function App() {
     <BrowserRouter>
       <div className={darkMode ? 'app dark' : 'app'}>
         <div className="container">
-          <Navbar />
+          <Navbar
+  isLoggedIn={isLoggedIn}
+  setIsLoggedIn={setIsLoggedIn}
+/>
           <div className="theme-toggle">
             <button onClick={() => setDarkMode(!darkMode)}>
               {darkMode ? '☀️ Light' : '🌙 Dark'}
@@ -73,8 +83,26 @@ export default function App() {
             path="/booking"
             element={<Booking bookings={bookings} setBookings={setBookings} />}
           />
-          <Route path="/login" element={<Login />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route
+  path="/login"
+  element={
+    <Login
+      setIsLoggedIn={setIsLoggedIn}
+    />
+  }
+/>
+          <Route
+  path="/admin"
+  element={
+    isLoggedIn ? (
+      <Admin bookings={bookings} />
+    ) : (
+      <Login
+        setIsLoggedIn={setIsLoggedIn}
+      />
+    )
+  }
+/>
           <Route
   path="/profile"
   element={<Profile />}

@@ -572,3 +572,36 @@ body {
 
   margin-bottom: 20px;
 }
+/* Profile */
+
+.profile-page {
+  padding: 80px 20px;
+
+  text-align: center;
+}
+
+.profile-card {
+  background: white;
+
+  max-width: 400px;
+
+  margin: auto;
+
+  padding: 40px;
+
+  border-radius: 25px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.profile-card h2 {
+  color: #ff4f8b;
+
+  margin-bottom: 20px;
+}
+
+.profile-card p {
+  color: #666;
+
+  margin: 10px 0;
+}
