@@ -76,7 +76,7 @@ export default function Login({
 
       <div className="login-box">
 
-        <h2>Admin Login</h2>
+        <h2>Login</h2>
 
         <input
           type="text"

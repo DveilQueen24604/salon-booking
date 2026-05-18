@@ -17,12 +17,25 @@ export default function Popup({
       return;
     }
 
-    const newBooking = {
-      name,
-      date,
-      time,
-      service,
-    };
+    const currentUser =
+  JSON.parse(
+    localStorage.getItem(
+      'currentUser'
+    )
+  );
+
+const newBooking = {
+
+  name,
+  phone,
+  date,
+  time,
+  service,
+
+  userEmail:
+    currentUser?.email || '',
+
+};
 
     setBookings([...bookings, newBooking]);
 

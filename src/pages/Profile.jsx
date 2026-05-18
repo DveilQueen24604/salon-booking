@@ -8,11 +8,18 @@ export default function Profile() {
     );
 
   const bookings =
+  
     JSON.parse(
       localStorage.getItem(
         'bookings'
       )
     ) || [];
+    const userBookings =
+  bookings.filter(
+    (booking) =>
+      booking.userEmail ===
+      user?.email
+  );
 
   return (
 
@@ -40,7 +47,7 @@ export default function Profile() {
 
       <div className="booking-list">
 
-        {bookings.map((booking, index) => (
+      {userBookings.map((booking, index) => (
 
           <div
             className="booking-card"
